@@ -1,10 +1,7 @@
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import org.apache.pdfbox.pdmodel.PDDocument;
-import org.apache.pdfbox.text.PDFTextStripper;
 import org.apache.poi.sl.usermodel.PlaceableShape;
 import org.apache.poi.xslf.usermodel.*;
 
@@ -26,7 +23,14 @@ public class Main {
         //Closing the document
         document.close();
         */
-        readPPT();
+//        readPPT();
+
+        CorpusCreater cp = new CorpusCreater("corpusFolder");
+        cp.add("ABC", new FileInfo("ABC","algebra","a+b=b+a"));
+        cp.add("LECTURE 1", new FileInfo("Lecture 1","JavaIntro","if(hasTwoBalls)\n  System.out.println(8--->);\n  else System.out.println(.--->);"));
+
+
+        cp.createCorpose();
     }
 
     public static void readPPT() throws IOException {
