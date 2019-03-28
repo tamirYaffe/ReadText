@@ -5,23 +5,23 @@ import java.util.Map;
 import java.util.TreeMap;
 
 public class CorpusCreater {
-    Map<String,String> data;
+    Map<String, FileInfo> data;
     String output;
 
 
     public CorpusCreater(String outputPath){
 
         output=outputPath;
-        data = new TreeMap<String, String>();
+        data = new TreeMap<String, FileInfo>();
     }
 
 
-    public void add(String fileName, String txt) {
-        if(fileName == null || txt == null || fileName =="" || txt == "") {
+    public void add(String fileName, FileInfo mData) {
+        if(fileName == null || mData == null || fileName =="" || mData.getTxt() == "") {
             System.out.println("bracha input error - did not add the file to the corpus");
             return;
         }
-        data.put(fileName,txt);
+        data.put(fileName,mData);
 
     }
 
@@ -42,11 +42,12 @@ public class CorpusCreater {
 
 
             for (String fileName : data.keySet()) {
-                bf.write("<Doc>\n" +
+                bf.write("<DOC>\n" +
                         "<DOCNO> "+fileName+" </DOCNO>\n"
-                        +"<Text>\n"
-                        + data.get(fileName)+" \n"
-                        +"<Text>\n<Doc>\n");
+                        +"<F P=104> "+data.get(fileName).getCourse()+" </F>\n"
+                        +"<TEXT>\n"
+                        + data.get(fileName).getTxt()+" \n"
+                        +"</TEXT>\n</DOC>\n");
             }
 
             bf.close();
