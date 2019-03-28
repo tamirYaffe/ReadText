@@ -1,3 +1,5 @@
+package CorpusConvert;
+
 public class FileInfo {
 
     String fileName;

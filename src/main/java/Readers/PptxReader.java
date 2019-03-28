@@ -1,3 +1,5 @@
+package Readers;
+
 import org.apache.poi.sl.extractor.SlideShowExtractor;
 import org.apache.poi.xslf.usermodel.XMLSlideShow;
 import org.apache.poi.xslf.usermodel.XSLFShape;
@@ -7,8 +9,14 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 
-public class PptxReader {
-    public void readPptxFile(String pathName){
+public class PptxReader extends AReader{
+
+    /**
+     *
+     * @param pathName
+     * @return
+     */
+    private String readPptxFile(String pathName){
         try{
             File file = new File(pathName);
             XMLSlideShow ppt = new XMLSlideShow(new FileInputStream(file));
@@ -18,7 +26,9 @@ public class PptxReader {
             slideShowExtractor.setMasterByDefault(true);
             slideShowExtractor.setNotesByDefault(true);
             String allTextContentInSlideShow = slideShowExtractor.getText();
-            System.out.println(allTextContentInSlideShow);
+//            System.out.println(allTextContentInSlideShow);
+            return allTextContentInSlideShow;
+
             //<editor-fold desc="other way">
         /*
         // get slides
@@ -52,6 +62,12 @@ public class PptxReader {
             //</editor-fold>
         }catch (IOException e){
             e.printStackTrace();
+            return null;
         }
+    }
+
+
+    public String readFile(String path) {
+        return readPptxFile(path);
     }
 }

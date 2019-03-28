@@ -2,10 +2,14 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 
+import CorpusConvert.CorpusCreater;
+import CorpusConvert.FileInfo;
+import Readers.TextExtractor;
 import org.apache.poi.sl.usermodel.PlaceableShape;
 import org.apache.poi.xslf.usermodel.*;
 
 public class Main {
+    static public String systemSeparator = System.getProperty("file.separator");
 
     public static void main(String args[]) throws IOException {
         /*
@@ -25,12 +29,12 @@ public class Main {
         */
 //        readPPT();
 
-        CorpusCreater cp = new CorpusCreater("corpusFolder");
-        cp.add("ABC", new FileInfo("ABC","algebra","a+b=b+a"));
-        cp.add("LECTURE 1", new FileInfo("Lecture 1","JavaIntro","if(hasTwoBalls)\n  System.out.println(8--->);\n  else System.out.println(.--->);"));
 
-
-        cp.createCorpose();
+        String sResourcesPath = System.getProperty("user.dir") + systemSeparator + "resources";
+        File corpusDir = new File(sResourcesPath+ systemSeparator + "Corpus");
+        String ourputDir = sResourcesPath + systemSeparator + "Output";
+        TextExtractor extractor =  new TextExtractor(corpusDir, ourputDir);
+        extractor.readDirectories();
     }
 
     public static void readPPT() throws IOException {

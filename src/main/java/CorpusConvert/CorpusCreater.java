@@ -1,12 +1,15 @@
+package CorpusConvert;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class CorpusCreater {
+public class CorpusCreater implements ICorpusCreater{
     Map<String, FileInfo> data;
     String output;
+    String sysSeparator = System.getProperty("file.separator");
 
 
     public CorpusCreater(String outputPath){
@@ -34,7 +37,8 @@ public class CorpusCreater {
         try {
             File folder = new File(output);
             folder.mkdir();
-            File corpus = new File(output+"/corpus");
+            String outputFileName = output.substring(output.lastIndexOf(sysSeparator));
+            File corpus = new File(output+ outputFileName);
 
 
             FileWriter fw = new FileWriter(corpus);

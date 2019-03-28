@@ -1,3 +1,5 @@
+package CorpusConvert;
+
 public interface ICorpusCreater {
     /**
      * add a file to the corpus
